@@ -8,21 +8,24 @@
 const int rs = 8, en = 7, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
+//se definen los puertos y pines en donde están conectados los ervos
 #define pinservo1 11
 #define pinservo2 10
 #define pinservo3 9
 #define pinservo4 6
 
+//se definen los servos como servos
 Servo servo1;
 Servo servo2;
 Servo servo3;
 Servo servo4;
 
-#define boton1 PC0
-#define boton2 PC1
-#define boton3 PC2
-#define boton4 PC3
-#define boton5 PC4
+//se definen los puertos y pines donde estan los botones
+#define boton1 PC0 //vertical
+#define boton2 PC1 //horizontal
+#define boton3 PC2 //mojar pincel
+#define boton4 PC3 //abrir pinza
+#define boton5 PC4 //interrupcion
 
 int angle0 = 0;
 int angle300 = 15;
@@ -32,6 +35,7 @@ int angle110 = 110;
 int angle180 = 180;
 int angle270 = 270;
 
+//se define donde se van a almacenar los angulos en la EEPROM
 int add_angle0 = 0;
 int add_angle30 = 1;
 int add_angle90 = 2;
@@ -40,6 +44,7 @@ int add_angle180 = 4;
 int add_angle270 = 5;
 int add_angle300 = 6;
 
+//interrupciones
 volatile bool interruptFlag1 = false;
 volatile bool interruptFlag2 = false;
 volatile bool interruptFlag3 = false;
@@ -48,11 +53,11 @@ volatile bool interruptFlag5 = false;
 
 void setup()
 {
-  DDRB |= (1 << pinservo1) | (1 << pinservo2) | (1 << pinservo3);
-  DDRD |= (1 << pinservo4);
+  DDRB |= (1 << pinservo1) | (1 << pinservo2) | (1 << pinservo3); //configura los pines de servos PortB como salida
+  DDRD |= (1 << pinservo4); //configura pines de los servos PortD como salidas
 
-  DDRC &= ~((1 << boton1) | (1 << boton2) | (1 << boton3) | (1 << boton4) | (1 << boton5));
-  PORTC |= (1 << boton1) | (1 << boton2) | (1 << boton3) | (1 << boton4) | (1 << boton5);
+  DDRC &= ~((1 << boton1) | (1 << boton2) | (1 << boton3) | (1 << boton4) | (1 << boton5)); //configura pines de botones como entradas
+  PORTC |= (1 << boton1) | (1 << boton2) | (1 << boton3) | (1 << boton4) | (1 << boton5); //activar resistencias pull-up para botones
 
   PCICR |= (1 << PCIE1);
   PCMSK1 |= (1 << PCINT8) | (1 << PCINT9) | (1 << PCINT10) | (1 << PCINT11) | (1 << PCINT12);
@@ -164,4 +169,21 @@ else if (interruptFlag3) //dip in the paint
     delay(500);
 
     interruptFlag3 = false;
+  }
+else if (interruptFlag4) //abre pinza
+  {
+    lcd.setCursor(0, 0);
+    lcd.print("Pinza abierta       ");
+    lcd.setCursor(0, 1);
+    lcd.print("                    ");
+    lcd.setCursor(0, 2);
+    lcd.print("                    ");
+    lcd.setCursor(0, 3);
+    lcd.print("                    ");
+
+    servo4.write(angle180);
+    delay(3000);
+    servo4.write(angle0);
+
+    interruptFlag4 = false;
   }

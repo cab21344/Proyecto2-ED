@@ -4,3 +4,11 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include <Servo.h>
+
+const int rs = 8, en = 7, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
+
+#define pinservo1 11
+#define pinservo2 10
+#define pinservo3 9
+#define pinservo4 6

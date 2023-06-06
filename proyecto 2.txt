@@ -39,3 +39,9 @@ int add_angle110 = 3;
 int add_angle180 = 4;
 int add_angle270 = 5;
 int add_angle300 = 6;
+
+volatile bool interruptFlag1 = false;
+volatile bool interruptFlag2 = false;
+volatile bool interruptFlag3 = false;
+volatile bool interruptFlag4 = false;
+volatile bool interruptFlag5 = false;

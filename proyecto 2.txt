@@ -93,7 +93,7 @@ void loop()
   lcd.setCursor(0, 1);
   lcd.print("2) horizontal       ");
   lcd.setCursor(0, 2);
-  lcd.print("3) cuadrado         ");
+  lcd.print("3) mojar pincel     ");
   lcd.setCursor(0, 3);
   lcd.print("4) pinza            ");
   delay(1000);
@@ -102,3 +102,22 @@ void loop()
   servo2.write(angle180);
   servo3.write(angle0);
   servo4.write(angle0);
+
+if (interruptFlag1) //hace línea vertical
+  {
+    lcd.setCursor(0, 0);
+    lcd.print("Vertical            ");
+    lcd.setCursor(0, 1);
+    lcd.print("                    ");
+    lcd.setCursor(0, 2);
+    lcd.print("                    ");
+    lcd.setCursor(0, 3);
+    lcd.print("                    ");
+
+    servo2.write(angle110 + angle30);
+    delay(500);
+    //servo2.write(angle180);
+    servo3.write(angle90 - angle30);
+
+    interruptFlag1 = false;
+  }

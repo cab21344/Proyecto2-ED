@@ -87,3 +87,18 @@ void loop()
   angle180 = EEPROM.read(add_angle180);
   angle270 = EEPROM.read(add_angle270);
   angle300 = EEPROM.read(add_angle300);
+
+  lcd.setCursor(0, 0);
+  lcd.print("1) vertical         ");
+  lcd.setCursor(0, 1);
+  lcd.print("2) horizontal       ");
+  lcd.setCursor(0, 2);
+  lcd.print("3) cuadrado         ");
+  lcd.setCursor(0, 3);
+  lcd.print("4) pinza            ");
+  delay(1000);
+
+  servo1.write(angle0);
+  servo2.write(angle180);
+  servo3.write(angle0);
+  servo4.write(angle0);

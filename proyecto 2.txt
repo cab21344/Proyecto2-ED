@@ -56,3 +56,24 @@ void setup()
 
   PCICR |= (1 << PCIE1);
   PCMSK1 |= (1 << PCINT8) | (1 << PCINT9) | (1 << PCINT10) | (1 << PCINT11) | (1 << PCINT12);
+  
+  servo1.attach(pinservo1);
+  servo2.attach(pinservo2);
+  servo3.attach(pinservo3);
+  servo4.attach(pinservo4);
+
+  ICR1 = 20000;
+  OCR1A = 2000;
+
+  lcd.begin(20, 4);
+  lcd.print("Brazo robotico");
+  delay(500);
+
+  EEPROM.write(add_angle0, angle0);
+  EEPROM.write(add_angle30, angle30);
+  EEPROM.write(add_angle90, angle90);
+  EEPROM.write(add_angle110, angle110);
+  EEPROM.write(add_angle180, angle180);
+  EEPROM.write(add_angle270, angle270);
+  EEPROM.write(add_angle300, angle300);
+}

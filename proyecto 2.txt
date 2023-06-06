@@ -45,3 +45,14 @@ volatile bool interruptFlag2 = false;
 volatile bool interruptFlag3 = false;
 volatile bool interruptFlag4 = false;
 volatile bool interruptFlag5 = false;
+
+void setup()
+{
+  DDRB |= (1 << pinservo1) | (1 << pinservo2) | (1 << pinservo3);
+  DDRD |= (1 << pinservo4);
+
+  DDRC &= ~((1 << boton1) | (1 << boton2) | (1 << boton3) | (1 << boton4) | (1 << boton5));
+  PORTC |= (1 << boton1) | (1 << boton2) | (1 << boton3) | (1 << boton4) | (1 << boton5);
+
+  PCICR |= (1 << PCIE1);
+  PCMSK1 |= (1 << PCINT8) | (1 << PCINT9) | (1 << PCINT10) | (1 << PCINT11) | (1 << PCINT12);

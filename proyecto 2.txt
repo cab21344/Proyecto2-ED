@@ -121,3 +121,22 @@ if (interruptFlag1) //hace línea vertical
 
     interruptFlag1 = false;
   }
+  else if (interruptFlag2) //hace línea horizontal
+  {
+    lcd.setCursor(0, 0);
+    lcd.print("horizontal          ");
+    lcd.setCursor(0, 1);
+    lcd.print("                    ");
+    lcd.setCursor(0, 2);
+    lcd.print("                    ");
+    lcd.setCursor(0, 3);
+    lcd.print("                    ");
+
+    servo2.write(angle110);
+    servo3.write(angle0);
+    delay(500);
+    servo1.write(angle90);
+    delay(500);
+
+    interruptFlag2 = false;
+  }

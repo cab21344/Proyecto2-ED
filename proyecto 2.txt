@@ -87,6 +87,7 @@ void setup()
 
 void loop()
 {
+//lee los ángulos que se almacenaron en la EEPROM
   angle0 = EEPROM.read(add_angle0);
   angle30 = EEPROM.read(add_angle30);
   angle90 = EEPROM.read(add_angle90);
@@ -95,6 +96,7 @@ void loop()
   angle270 = EEPROM.read(add_angle270);
   angle300 = EEPROM.read(add_angle300);
 
+//menú principal
   lcd.setCursor(0, 0);
   lcd.print("1) vertical         ");
   lcd.setCursor(0, 1);
@@ -105,6 +107,7 @@ void loop()
   lcd.print("4) pinza            ");
   delay(1000);
 
+//se colocan los servos en posición inicial
   servo1.write(angle0);
   servo2.write(angle180);
   servo3.write(angle0);
@@ -192,11 +195,34 @@ else if (interruptFlag4) //abre pinza
 else if (interruptFlag5) //interrupcion para regresar a lo normal
   {
     servo4.write(angle30);
-
     servo1.write(angle0);
     servo2.write(angle180);
     servo3.write(angle0);
 
     interruptFlag5 = false;
+  }
+}
+
+ISR(PCINT1_vect) //interrupciones
+{
+  if (!(PINC & (1 << boton1))) //interrupcion boton 1
+  {
+    interruptFlag1 = true;
+  }
+  else if (!(PINC & (1 << boton2))) //interrupcion boton 2
+  {
+    interruptFlag2 = true;
+  }
+  else if (!(PINC & (1 << boton3))) //interrupcion boton 3
+  {
+    interruptFlag3 = true;
+  }
+  else if (!(PINC & (1 << boton4))) //interrupcion boton 4
+  {
+    interruptFlag4 = true;
+  }
+  else if (!(PINC & (1 << boton5))) //interrupcion boton 5
+  {
+    interruptFlag5 = true;
   }
 }

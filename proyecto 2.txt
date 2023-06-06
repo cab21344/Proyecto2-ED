@@ -77,3 +77,13 @@ void setup()
   EEPROM.write(add_angle270, angle270);
   EEPROM.write(add_angle300, angle300);
 }
+
+void loop()
+{
+  angle0 = EEPROM.read(add_angle0);
+  angle30 = EEPROM.read(add_angle30);
+  angle90 = EEPROM.read(add_angle90);
+  angle110 = EEPROM.read(add_angle110);
+  angle180 = EEPROM.read(add_angle180);
+  angle270 = EEPROM.read(add_angle270);
+  angle300 = EEPROM.read(add_angle300);

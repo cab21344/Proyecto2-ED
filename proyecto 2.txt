@@ -23,3 +23,19 @@ Servo servo4;
 #define boton3 PC2
 #define boton4 PC3
 #define boton5 PC4
+
+int angle0 = 0;
+int angle300 = 15;
+int angle30 = 30;
+int angle90 = 90;
+int angle110 = 110;
+int angle180 = 180;
+int angle270 = 270;
+
+int add_angle0 = 0;
+int add_angle30 = 1;
+int add_angle90 = 2;
+int add_angle110 = 3;
+int add_angle180 = 4;
+int add_angle270 = 5;
+int add_angle300 = 6;

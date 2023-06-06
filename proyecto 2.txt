@@ -140,3 +140,28 @@ if (interruptFlag1) //hace línea vertical
 
     interruptFlag2 = false;
   }
+else if (interruptFlag3) //dip in the paint
+  {
+    lcd.setCursor(0, 0);
+    lcd.print("Mojar pincel        ");
+    lcd.setCursor(0, 1);
+    lcd.print("                    ");
+    lcd.setCursor(0, 2);
+    lcd.print("                    ");
+    lcd.setCursor(0, 3);
+    lcd.print("                    ");
+
+    servo1.write(angle110);
+    delay(500);
+    servo2.write(angle110);
+    delay(500);
+    servo2.write(angle180);
+    delay(500);
+    servo2.write(angle110);
+    delay(500);
+    servo2.write(angle180);
+    
+    delay(500);
+
+    interruptFlag3 = false;
+  }

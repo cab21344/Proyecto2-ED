@@ -59,21 +59,23 @@ void setup()
   DDRC &= ~((1 << boton1) | (1 << boton2) | (1 << boton3) | (1 << boton4) | (1 << boton5)); //configura pines de botones como entradas
   PORTC |= (1 << boton1) | (1 << boton2) | (1 << boton3) | (1 << boton4) | (1 << boton5); //activar resistencias pull-up para botones
 
-  PCICR |= (1 << PCIE1);
-  PCMSK1 |= (1 << PCINT8) | (1 << PCINT9) | (1 << PCINT10) | (1 << PCINT11) | (1 << PCINT12);
+  PCICR |= (1 << PCIE1); //habilitar interrupciones
+  PCMSK1 |= (1 << PCINT8) | (1 << PCINT9) | (1 << PCINT10) | (1 << PCINT11) | (1 << PCINT12); //habilitar interrupciones
   
+  //union de servos con su pin
   servo1.attach(pinservo1);
   servo2.attach(pinservo2);
   servo3.attach(pinservo3);
   servo4.attach(pinservo4);
 
-  ICR1 = 20000;
-  OCR1A = 2000;
+  ICR1 = 20000; //configurar periodo del PWM (50Hz aproximadamente)
+  OCR1A = 2000; //configurar ancho de pulso del PWM (40% aproximadamente)
 
-  lcd.begin(20, 4);
+  lcd.begin(20, 4); //inicio de la pantalla LCD
   lcd.print("Brazo robotico");
   delay(500);
 
+//almacenar los ángulos en la EEPROM
   EEPROM.write(add_angle0, angle0);
   EEPROM.write(add_angle30, angle30);
   EEPROM.write(add_angle90, angle90);
@@ -187,3 +189,14 @@ else if (interruptFlag4) //abre pinza
 
     interruptFlag4 = false;
   }
+else if (interruptFlag5) //interrupcion para regresar a lo normal
+  {
+    servo4.write(angle30);
+
+    servo1.write(angle0);
+    servo2.write(angle180);
+    servo3.write(angle0);
+
+    interruptFlag5 = false;
+  }
+}

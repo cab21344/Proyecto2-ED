@@ -17,3 +17,9 @@ Servo servo1;
 Servo servo2;
 Servo servo3;
 Servo servo4;
+
+#define boton1 PC0
+#define boton2 PC1
+#define boton3 PC2
+#define boton4 PC3
+#define boton5 PC4
